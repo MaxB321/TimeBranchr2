@@ -1,3 +1,6 @@
+# IMPORTANT
+.env
+
 # Prerequisites
 *.d
 
@@ -66,3 +69,6 @@ vcpkg_installed/
 # test output & cache
 Testing/
 .cache/
+
+# Misc
+todo.txt
