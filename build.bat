@@ -1,6 +1,15 @@
 @echo off
 setlocal
 
+:: --- Qt location (override by setting QT_ROOT before running) ---
+if "%QT_ROOT%"=="" set QT_ROOT=C:\Qt\6.12.0\msvc2022_64
+
+if not exist "%QT_ROOT%\bin\windeployqt.exe" (
+    echo Error: Qt not found at "%QT_ROOT%"
+    echo Set QT_ROOT to your Qt kit folder, e.g. C:\Qt\6.12.0\msvc2022_64
+    exit /b 1
+)
+
 :: Handle argument
 set CONFIG=%1
 
@@ -21,7 +30,7 @@ if not exist %BUILD_DIR% mkdir %BUILD_DIR%
 echo Building %CONFIG%...
 
 :: Configure CMake
-cmake -S . -B "%BUILD_DIR%" -A x64
+cmake -S . -B "%BUILD_DIR%" -A x64 -DCMAKE_PREFIX_PATH="%QT_ROOT%"
 
 if errorlevel 1 (
     echo CMake configuration failed.
