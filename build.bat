@@ -18,13 +18,25 @@ set BUILD_DIR=build-%CONFIG%
 
 if not exist %BUILD_DIR% mkdir %BUILD_DIR%
 
-cd %BUILD_DIR%
-
 echo Building %CONFIG%...
 
-cmake .. -A x64
-cmake --build . --config %CONFIG%
+:: Configure CMake
+cmake -S . -B "%BUILD_DIR%" -A x64
 
-cd .. 
+if errorlevel 1 (
+    echo CMake configuration failed.
+    exit /b 1
+)
 
-echo Built %CONFIG% in %BUILD_DIR%
+:: Build project
+cmake --build "%BUILD_DIR%" --config "%CONFIG%" --parallel
+
+if errorlevel 1 (
+    echo Build Failed.
+    exit /b 1
+)
+
+echo.
+echo Successfully built %CONFIG% in %BUILD_DIR%
+
+endlocal
