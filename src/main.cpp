@@ -1,11 +1,12 @@
 #include "pch.h"
+#include "main_window.h"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    QPushButton button("push me");
-    button.show();
-    return app.exec();
+    MainWindow mainWindow;
+    mainWindow.show();
 
-    return 0;
+
+    return app.exec();
 }

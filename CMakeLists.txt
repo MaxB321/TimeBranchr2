@@ -42,6 +42,8 @@ set_target_properties(${PROJ_NAME} PROPERTIES WIN32_EXECUTABLE ON)
 
 # Copy Qt DLLs/plugins next to the exe after each build
 add_custom_command(TARGET ${PROJ_NAME} POST_BUILD
-    COMMAND Qt6::windeployqt ARGS "$<TARGET_FILE:${PROJ_NAME}>"
+    COMMAND Qt6::windeployqt ARGS 
+        --skip-plugin-types tls,networkinformation
+        "$<TARGET_FILE:${PROJ_NAME}>"
     COMMENT "Running windeployqt"
 )

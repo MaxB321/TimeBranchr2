@@ -2,12 +2,9 @@
 #include "main_window.h"
 
 
-void DisplayMainWindow()
+MainWindow::MainWindow()
 {
-
+    this->setupUi(this);
 }
 
-void LoadBaseUi()
-{
-
-}
+MainWindow::~MainWindow() = default;

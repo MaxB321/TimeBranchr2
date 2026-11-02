@@ -266,7 +266,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "TimeBranchr", nullptr));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "TimeBranchr2", nullptr));
         actionDark_Mode->setText(QCoreApplication::translate("MainWindow", "Dark Mode", nullptr));
         actionCopy->setText(QCoreApplication::translate("MainWindow", "Copy (Ctrl+C)", nullptr));
         actionPaste->setText(QCoreApplication::translate("MainWindow", "Paste (Ctrl+V)", nullptr));
