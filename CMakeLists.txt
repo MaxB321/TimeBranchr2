@@ -11,7 +11,6 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS "src/*.cpp")
 file(GLOB_RECURSE HEADERS    CONFIGURE_DEPENDS "headers/*.h")
 file(GLOB_RECURSE QRC_FILES  CONFIGURE_DEPENDS "src/gui/qrc/*.qrc")
-file(GLOB_RECURSE UI_FILES   CONFIGURE_DEPENDS "src/gui/ui/*.ui")
 
 # Let CMake run moc, uic and rcc automatically
 set(CMAKE_AUTOMOC ON)
@@ -24,7 +23,6 @@ add_executable(${PROJ_NAME}
     ${SOURCES}
     ${HEADERS}      # needed so AUTOMOC sees Q_OBJECT headers
     ${QRC_FILES}    # processed by AUTORCC
-    ${UI_FILES}     # processed by AUTOUIC -> ui_<name>.h
 )
 
 
