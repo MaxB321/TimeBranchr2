@@ -6,7 +6,7 @@ This is a new version of my old TimeBranchr App.
 ## Description
 App's purpose is to track time for specific activities. 
 
-There is a triple heirarchy structure. This allows users to have an outer activity followed by a mid layer activity, and finally an inner layer activity.\
+There is a triple heirarchy structure. This allows users to have an outer activity followed by a mid layer activity, and finally an inner layer activity.
 
 Example:
 - Studying: 100 hrs
