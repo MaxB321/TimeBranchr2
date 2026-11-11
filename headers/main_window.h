@@ -7,8 +7,7 @@
 class MainWindow : public Ui_MainWindow, public QMainWindow
 {
 public:
-    MainWindow();
-    ~MainWindow();
+    explicit MainWindow();
 
 };
 

@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "main_window.h"
-#include "toolbar.h"
+#include "toolbar_widget.h"
 
 
 MainWindow::MainWindow()
@@ -11,4 +11,3 @@ MainWindow::MainWindow()
     addToolBar(toolbar);
 }
 
-MainWindow::~MainWindow() = default;

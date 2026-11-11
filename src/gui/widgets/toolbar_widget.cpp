@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "toolbar.h"
+#include "toolbar_widget.h"
 
 ToolbarWidget::ToolbarWidget(QWidget* parent)
     : QToolBar(parent)
