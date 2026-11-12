@@ -4,8 +4,9 @@
 #include "enums.h"
 
 
-class TimerWidget
+class TimerWidget : public QObject
 {
+    Q_OBJECT
 public:
     explicit TimerWidget(QLabel* timerLabel, QLabel* pauseLabel);
 
@@ -15,8 +16,8 @@ public:
     void StopTimer();
 
 private:
-    std::string DisplayTimer(uint32_t seconds);
-    void Update_Timer();
+    std::string FormatTime(uint32_t seconds);
+    void UpdateTimer();
 
     uint32_t m_elapsedSeconds{};
     QTimer m_timer{};
