@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "main_window.h"
-#include "toolbar_widget.h"
-#include "timer_widget.h"
+
 
 
 MainWindow::MainWindow()
@@ -10,11 +9,8 @@ MainWindow::MainWindow()
     resize(1280, 720);
     setIconSize(QSize(25, 25));
 
-    
-
-    ToolbarWidget* toolbar = new ToolbarWidget(this);
-    addToolBar(toolbar);
-
-
+    m_timerWidget = new TimerWidget(timerLabel, pauseLabel);
+    m_toolbarWidget = new ToolbarWidget(*this, *m_timerWidget);
+    addToolBar(m_toolbarWidget);
 }
 
