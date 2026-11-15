@@ -6,6 +6,7 @@
 class ToolbarWidget : public QToolBar
 {
     Q_OBJECT
+    
 public:
     explicit ToolbarWidget(QWidget& parent, TimerWidget& timerWidget);
     void CreateCategory();

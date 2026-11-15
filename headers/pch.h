@@ -25,6 +25,7 @@
 #include <QIcon>
 #include <QImage>
 #include <QKeyEvent>
+#include <QEvent>
 #include <QMouseEvent>
 #include <QCloseEvent>
 #include <QResizeEvent>

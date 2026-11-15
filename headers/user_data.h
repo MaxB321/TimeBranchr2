@@ -1,0 +1,22 @@
+#pragma once 
+
+#include "pch.h"
+
+struct UserData
+{
+    std::unordered_map<std::string, std::string> categories{};
+    std::unordered_map<std::string, std::string> subCategories{};
+    std::unordered_map<std::string, QTreeWidgetItem> categoryItem{};
+    std::unordered_map<std::string, std::vector<int>> logs{};
+    std::unordered_map<std::string, std::vector<std::chrono::system_clock::time_point>> logsDatetime{};
+};
+
+namespace DataFile
+{
+    void CreateFile();
+    bool FileExists();
+    bool GetFlag();
+    void Load();
+    void Save();
+    void SetFlag();
+}
