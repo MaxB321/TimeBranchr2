@@ -13,7 +13,7 @@ bool DataFile::FileExists()
 
 std::string DataFile::GetUserName()
 {
-
+    return " ";
 }
 
 void DataFile::Load()

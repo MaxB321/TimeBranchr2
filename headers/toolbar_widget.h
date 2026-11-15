@@ -16,6 +16,6 @@ public:
     void StopTimer();
 
 private:
-    TimerWidget* m_ptimerWidget{};
+    TimerWidget& m_ptimerWidget;
 
 };

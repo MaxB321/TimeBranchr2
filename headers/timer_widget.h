@@ -8,7 +8,7 @@ class TimerWidget : public QObject
 {
     Q_OBJECT
 public:
-    explicit TimerWidget(QLabel* timerLabel, QLabel* pauseLabel);
+    explicit TimerWidget(QLabel& timerLabel, QLabel& pauseLabel);
 
     void PauseTimer();
     void SetTimerColor(DisplayMode displayMode);
@@ -21,7 +21,7 @@ private:
 
     uint32_t m_elapsedSeconds{};
     QTimer m_timer{};
-    QLabel* m_pTimerLabel{};
-    QLabel* m_pPauseLabel{};
+    QLabel& m_pTimerLabel;
+    QLabel& m_pPauseLabel;
 };
 

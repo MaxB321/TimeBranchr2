@@ -2,7 +2,7 @@
 #include "toolbar_widget.h"
 
 ToolbarWidget::ToolbarWidget(QWidget& parent, TimerWidget& timerWidget)
-    : QToolBar(&parent), m_ptimerWidget(&timerWidget)
+    : QToolBar(&parent), m_ptimerWidget(timerWidget)
 {
     setMovable(false);
     setToolButtonStyle(Qt::ToolButtonStyle::ToolButtonTextUnderIcon);
@@ -45,15 +45,15 @@ void ToolbarWidget::DeleteCategory()
 
 void ToolbarWidget::PauseTimer()
 {
-    m_ptimerWidget->PauseTimer();
+    m_ptimerWidget.PauseTimer();
 }
 
 void ToolbarWidget::StartTimer()
 {
-    m_ptimerWidget->StartTimer();
+    m_ptimerWidget.StartTimer();
 }
 
 void ToolbarWidget::StopTimer()
 {
-    m_ptimerWidget->StopTimer();
+    m_ptimerWidget.StopTimer();
 }
