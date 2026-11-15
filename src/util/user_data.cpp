@@ -11,12 +11,22 @@ bool DataFile::FileExists()
     return true;
 }
 
+std::string DataFile::GetUserName()
+{
+
+}
+
 void DataFile::Load()
 {
 
 }
 
 void DataFile::Save()
+{
+
+}
+
+void DataFile::SetUserName(std::string& name)
 {
 
 }

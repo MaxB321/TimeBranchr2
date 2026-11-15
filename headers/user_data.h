@@ -9,12 +9,16 @@ struct UserData
     std::unordered_map<std::string, QTreeWidgetItem> categoryItem{};
     std::unordered_map<std::string, std::vector<int>> logs{};
     std::unordered_map<std::string, std::vector<std::chrono::system_clock::time_point>> logsDatetime{};
+
+    std::string userName{};
 };
 
 namespace DataFile
 {
     void CreateFile();
     bool FileExists();
+    std::string GetUserName();
     void Load();
     void Save();
+    void SetUserName(std::string& name);
 }
