@@ -11,22 +11,12 @@ bool DataFile::FileExists()
     return true;
 }
 
-bool DataFile::GetFlag()
-{
-    return true;
-}
-
 void DataFile::Load()
 {
 
 }
 
 void DataFile::Save()
-{
-
-}
-
-void DataFile::SetFlag()
 {
 
 }

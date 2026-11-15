@@ -6,7 +6,7 @@
 class ToolbarWidget : public QToolBar
 {
     Q_OBJECT
-    
+
 public:
     explicit ToolbarWidget(QWidget& parent, TimerWidget& timerWidget);
     void CreateCategory();
@@ -16,6 +16,6 @@ public:
     void StopTimer();
 
 private:
-    TimerWidget* m_timerWidget{};
+    TimerWidget* m_ptimerWidget{};
 
 };

@@ -3,9 +3,9 @@
 
 //Public 
 TimerWidget::TimerWidget(QLabel* timerLabel, QLabel* pauseLabel)
-    : m_timerLabel(timerLabel), m_pauseLabel(pauseLabel)
+    : m_pTimerLabel(timerLabel), m_pPauseLabel(pauseLabel)
 {
-    m_pauseLabel->setVisible(false);
+    m_pPauseLabel->setVisible(false);
     m_timer.setInterval(1000);
 
     QObject::connect(&m_timer, &QTimer::timeout, this, &TimerWidget::UpdateTimer);
@@ -16,12 +16,12 @@ void TimerWidget::PauseTimer()
     if (m_timer.isActive())
     {
         m_timer.stop();
-        m_pauseLabel->setVisible(true);
+        m_pPauseLabel->setVisible(true);
     }
-    else if (!m_timer.isActive() && m_timerLabel->text() != "00:00:00")
+    else if (!m_timer.isActive() && m_pTimerLabel->text() != "00:00:00")
     {
         m_timer.start();
-        m_pauseLabel->setVisible(false);
+        m_pPauseLabel->setVisible(false);
     }
 }
 
@@ -32,7 +32,7 @@ void TimerWidget::SetTimerColor(DisplayMode displayMode)
 
 void TimerWidget::StartTimer()
 {
-    if (!m_timer.isActive() && m_timerLabel->text() == "00:00:00")
+    if (!m_timer.isActive() && m_pTimerLabel->text() == "00:00:00")
         m_timer.start();
 }
 
@@ -40,8 +40,8 @@ void TimerWidget::StopTimer()
 {
     m_timer.stop();
     m_elapsedSeconds = 0;
-    m_timerLabel->setText("00:00:00");
-    m_pauseLabel->setVisible(false);
+    m_pTimerLabel->setText("00:00:00");
+    m_pTimerLabel->setVisible(false);
 }
 
 
@@ -58,5 +58,5 @@ std::string TimerWidget::FormatTime(uint32_t seconds)
 void TimerWidget::UpdateTimer()
 {
     m_elapsedSeconds += 1;
-    m_timerLabel->setText(QString::fromStdString(FormatTime(m_elapsedSeconds)));
+    m_pTimerLabel->setText(QString::fromStdString(FormatTime(m_elapsedSeconds)));
 }

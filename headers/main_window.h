@@ -13,8 +13,8 @@ public:
     explicit MainWindow();
 
 private:
-    TimerWidget* m_timerWidget{};
-    ToolbarWidget* m_toolbarWidget{};
+    TimerWidget* m_pTimerWidget{};
+    ToolbarWidget* m_pToolbarWidget{};
 };
 
 

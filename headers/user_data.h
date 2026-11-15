@@ -15,8 +15,6 @@ namespace DataFile
 {
     void CreateFile();
     bool FileExists();
-    bool GetFlag();
     void Load();
     void Save();
-    void SetFlag();
 }

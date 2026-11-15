@@ -21,7 +21,7 @@ private:
 
     uint32_t m_elapsedSeconds{};
     QTimer m_timer{};
-    QLabel* m_timerLabel{};
-    QLabel* m_pauseLabel{};
+    QLabel* m_pTimerLabel{};
+    QLabel* m_pPauseLabel{};
 };
 
