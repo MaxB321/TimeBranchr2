@@ -3,14 +3,37 @@
 
 
 CategoryWidget::CategoryWidget(QTreeWidget& uiTreeWidget, UserData& userDataStruct, UserSettings& userSettingsStruct)
-    : m_pUiTreeWidget(uiTreeWidget), m_pUserData(userDataStruct), m_pUserSettingsStruct(userSettingsStruct)
+    : m_uiTreeWidget(uiTreeWidget), m_userData(userDataStruct), m_userSettingsStruct(userSettingsStruct)
 {
-
+    connect(&m_uiTreeWidget, &QTreeWidget::itemDoubleClicked, this, &CategoryWidget::EditWidgetText);
 }
 
 void CategoryWidget::AddCategory()
 {
+    if (IsCurCategorySelected())
+    {
+        CategoryWidget::AddSubCategory();
+        return;
+    }
 
+    // m_uiTreeWidget.blockSignals(true);
+
+    QTreeWidgetItem* childItem = new QTreeWidgetItem(&m_uiTreeWidget);
+    childItem->setText(0, "New Category");
+    childItem->setText(1, "0 Sec"); 
+    childItem->setFlags(childItem->flags() | Qt::ItemFlag::ItemIsEditable);
+
+    std::string childItemText{childItem->text(0).toStdString()};
+
+    std::string categoryId{Util::GenerateUuidString()};
+    childItem->setData(0, Qt::ItemDataRole::UserRole, QString::fromStdString(categoryId));
+    m_userData.categoryItemMap[categoryId] = childItem;
+
+
+    
+    // m_uiTreeWidget.blockSignals(false);
+    // log_widget.init_category(category_id, child_item_text, self.user_id)
+    // self.sort_display()
 }
 
 void CategoryWidget::AddSubCategory()
@@ -30,7 +53,8 @@ void CategoryWidget::DisplayTotalTime(QTreeWidgetItem& item, int& time)
 
 void CategoryWidget::EditWidgetText()
 {
-
+    QTreeWidgetItem* curItem{m_uiTreeWidget.currentItem()};
+    m_uiTreeWidget.editItem(curItem, 0);
 }
 
 std::string CategoryWidget::FormatCategoryTime(int& time)
@@ -58,9 +82,13 @@ void CategoryWidget::InitCategoryTree()
 
 }
 
-bool CategoryWidget::IsCategorySelected(QTreeWidgetItem& item)
+bool CategoryWidget::IsCurCategorySelected()
 {
-    return true;
+    QTreeWidgetItem* curItem{m_uiTreeWidget.currentItem()};
+    if (curItem && curItem->isSelected())
+        return true;
+    
+    return false;
 }
 
 bool CategoryWidget::IsInnerMostLayer()

@@ -4,6 +4,7 @@
 #include "user_data.h"
 #include "user_settings.h"
 #include "enums.h"
+#include "util.h"
 
 
 class CategoryWidget : public QObject
@@ -22,7 +23,7 @@ public:
     CategoryType GetCategoryType(QTreeWidgetItem& item);
     void HideSubcatTotal(); // may put this in CategoryMenu TU later
     void InitCategoryTree();
-    bool IsCategorySelected(QTreeWidgetItem& item);
+    bool IsCurCategorySelected();
     bool IsInnerMostLayer();
     bool IsOuterMostLayer();
     void LoadCategories();
@@ -33,9 +34,9 @@ public:
 
 
 private:
-    QTreeWidget& m_pUiTreeWidget;
-    UserData& m_pUserData;
-    UserSettings& m_pUserSettingsStruct;
+    QTreeWidget& m_uiTreeWidget;
+    UserData& m_userData;
+    UserSettings& m_userSettingsStruct;
 
 };
 

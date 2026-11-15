@@ -2,13 +2,15 @@
 
 #include "pch.h"
 #include "timer_widget.h"
+#include "category_widget.h"
+
 
 class ToolbarWidget : public QToolBar
 {
     Q_OBJECT
 
 public:
-    explicit ToolbarWidget(QWidget& parent, TimerWidget& timerWidget);
+    explicit ToolbarWidget(QWidget& parent, TimerWidget& timerWidget, CategoryWidget& categoryWidget);
     void CreateCategory();
     void DeleteCategory();
     void PauseTimer();
@@ -16,6 +18,7 @@ public:
     void StopTimer();
 
 private:
-    TimerWidget& m_ptimerWidget;
+    TimerWidget& m_timerWidget;
+    CategoryWidget& m_categoryWidget;
 
 };

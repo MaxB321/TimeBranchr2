@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "toolbar_widget.h"
 
-ToolbarWidget::ToolbarWidget(QWidget& parent, TimerWidget& timerWidget)
-    : QToolBar(&parent), m_ptimerWidget(timerWidget)
+ToolbarWidget::ToolbarWidget(QWidget& parent, TimerWidget& timerWidget, CategoryWidget& categoryWidget)
+    : QToolBar(&parent), m_timerWidget(timerWidget), m_categoryWidget(categoryWidget)
 {
     setMovable(false);
     setToolButtonStyle(Qt::ToolButtonStyle::ToolButtonTextUnderIcon);
@@ -28,6 +28,7 @@ ToolbarWidget::ToolbarWidget(QWidget& parent, TimerWidget& timerWidget)
     stopButton->setStatusTip("Stop Timer");
     addAction(stopButton);
 
+    connect(newCategoryButton, &QAction::triggered, this, &ToolbarWidget::CreateCategory);
     connect(pauseButton, &QAction::triggered, this, &ToolbarWidget::PauseTimer);
     connect(startButton, &QAction::triggered, this, &ToolbarWidget::StartTimer);
     connect(stopButton, &QAction::triggered, this, &ToolbarWidget::StopTimer);
@@ -35,7 +36,7 @@ ToolbarWidget::ToolbarWidget(QWidget& parent, TimerWidget& timerWidget)
 
 void ToolbarWidget::CreateCategory()
 {
-
+    m_categoryWidget.AddCategory();
 }
 
 void ToolbarWidget::DeleteCategory()
@@ -45,15 +46,15 @@ void ToolbarWidget::DeleteCategory()
 
 void ToolbarWidget::PauseTimer()
 {
-    m_ptimerWidget.PauseTimer();
+    m_timerWidget.PauseTimer();
 }
 
 void ToolbarWidget::StartTimer()
 {
-    m_ptimerWidget.StartTimer();
+    m_timerWidget.StartTimer();
 }
 
 void ToolbarWidget::StopTimer()
 {
-    m_ptimerWidget.StopTimer();
+    m_timerWidget.StopTimer();
 }
