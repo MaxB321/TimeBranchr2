@@ -15,11 +15,12 @@ public:
     explicit CategoryWidget(QTreeWidget& uiTreeWidget, UserData& userDataStruct, UserSettings& userSettingsStruct);
     void AddCategory();
     void AddSubCategory();
-    void CleanupChildItems();
+    void CleanupChildItems(QTreeWidgetItem& item);
+    void DeleteSelectedCategory();
     void DisplayTotalTime(QTreeWidgetItem& item, int& time);
     void EditWidgetText();
     std::string FormatCategoryTime(int& time);
-    std::string GetCurCategoryId();
+    std::string GetCategoryId(QTreeWidgetItem* item);
     CategoryType GetCategoryType(QTreeWidgetItem& item);
     void HideSubcatTotal(); // may put this in CategoryMenu TU later
     void InitCategoryTree();

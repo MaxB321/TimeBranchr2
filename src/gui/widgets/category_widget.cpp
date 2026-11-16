@@ -41,9 +41,59 @@ void CategoryWidget::AddSubCategory()
 
 }
 
-void CategoryWidget::CleanupChildItems()
+void CategoryWidget::CleanupChildItems(QTreeWidgetItem& item)
 {
 
+}
+
+void CategoryWidget::DeleteSelectedCategory()
+{
+    QTreeWidgetItem* curItem{m_uiTreeWidget.currentItem()};
+    if (curItem && curItem->isSelected())
+    {
+        std::string categoryId = CategoryWidget::GetCategoryId(curItem);
+
+        // log_widget._user_logs.pop(category_id, None)
+        QTreeWidgetItem* parent = curItem->parent();
+        
+        if (CategoryWidget::IsOuterMostLayer())
+        {
+            CategoryWidget::CleanupChildItems(*curItem);
+            m_uiTreeWidget.takeTopLevelItem(m_uiTreeWidget.indexOfTopLevelItem(curItem));
+            // remove from UserData->categoryItemMap
+        }
+        else
+        {
+            // int oldTime = response.json()["category_time"]
+            std::string parentId = CategoryWidget::GetCategoryId(parent);
+            CategoryWidget::CleanupChildItems(*curItem);
+            parent->removeChild(curItem);
+
+            if (!parent->parent()) // middle layer
+            {
+                // parent_time = response.json()["category_time"]
+                // new_time = parent_time - old_time
+                // cat_widget.update_category_time(log_widget, CategoryType.MainCategory, parent)
+            } 
+            else // inner layer
+            {
+                // parent_time = response.json()["category_time"]
+                // new_time = parent_time - old_time
+                // cat_widget.update_category_time(log_widget, CategoryType.SubCategory, parent)
+
+                // QTreeWidgetItem* outmostItem = parent->parent();
+                // std::string outermostId = CategoryWidget::GetCategoryId(outmostItem);
+                // outermost_time = response.json()["category_time"]
+                // new_time = outermost_time - old_time
+                // cat_widget.update_category_time(log_widget, CategoryType.MainCategory, outermost_item)
+            }
+                
+        }
+            
+    } 
+    
+    // if (m_uiTreeWidget.topLevelItemCount() == 0)
+        // log_widget.clear_log_view()
 }
 
 void CategoryWidget::DisplayTotalTime(QTreeWidgetItem& item, int& time)
@@ -62,9 +112,9 @@ std::string CategoryWidget::FormatCategoryTime(int& time)
     return " ";
 }
 
-std::string CategoryWidget::GetCurCategoryId()
+std::string CategoryWidget::GetCategoryId(QTreeWidgetItem* item)
 {
-    return " ";
+    return item->data(0, Qt::ItemDataRole::UserRole).toString().toStdString();
 }
 
 CategoryType CategoryWidget::GetCategoryType(QTreeWidgetItem& item)

@@ -29,6 +29,7 @@ ToolbarWidget::ToolbarWidget(QWidget& parent, TimerWidget& timerWidget, Category
     addAction(stopButton);
 
     connect(newCategoryButton, &QAction::triggered, this, &ToolbarWidget::CreateCategory);
+    connect(deleteCategoryButton, &QAction::triggered, this, &ToolbarWidget::DeleteCategory);
     connect(pauseButton, &QAction::triggered, this, &ToolbarWidget::PauseTimer);
     connect(startButton, &QAction::triggered, this, &ToolbarWidget::StartTimer);
     connect(stopButton, &QAction::triggered, this, &ToolbarWidget::StopTimer);
@@ -41,7 +42,7 @@ void ToolbarWidget::CreateCategory()
 
 void ToolbarWidget::DeleteCategory()
 {
-
+    m_categoryWidget.DeleteSelectedCategory();
 }
 
 void ToolbarWidget::PauseTimer()

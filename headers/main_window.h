@@ -14,9 +14,10 @@ public:
     explicit MainWindow(UserData& userDataStruct, UserSettings& userSettingsStruct);
 
 private:
+    CategoryWidget* m_pCategoryWidget{};
     TimerWidget* m_pTimerWidget{};
     ToolbarWidget* m_pToolbarWidget{};
-    CategoryWidget* m_pCategoryWidget{};
+    
 };
 
 
