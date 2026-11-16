@@ -1,12 +1,16 @@
 #pragma once 
 
 #include "pch.h"
+#include "enums.h"
+
 
 struct UserData
 {
+    // std::string key is hash id
     std::unordered_map<std::string, std::string> categories{};
     std::unordered_map<std::string, std::string> subCategories{};
     std::unordered_map<std::string, QTreeWidgetItem*> categoryItemMap{};
+    std::unordered_map<std::string, CategoryType> categoryTypeMap{};
     std::unordered_map<std::string, std::vector<int>> logs{};
     std::unordered_map<std::string, std::vector<std::chrono::system_clock::time_point>> logsDatetime{};
 
