@@ -12,7 +12,7 @@ void CategoryWidget::AddCategory()
 {
     if (IsCurCategorySelected())
     {
-        CategoryWidget::AddSubCategory();
+        CategoryWidget::AddSubCategory(m_uiTreeWidget.currentItem());
         return;
     }
 
@@ -36,9 +36,30 @@ void CategoryWidget::AddCategory()
     // self.sort_display()
 }
 
-void CategoryWidget::AddSubCategory()
+void CategoryWidget::AddSubCategory(QTreeWidgetItem* selectedItem)
 {
+    if (CategoryWidget::IsInnerMostLayer())
+        return;
+     
+    // self.cat_tree.blockSignals(True)
 
+    QTreeWidgetItem* childItem = new QTreeWidgetItem();
+    childItem->setText(0, "Child Item");
+    childItem->setText(1, "0 Sec"); 
+    childItem->setFlags(childItem->flags() | Qt::ItemFlag::ItemIsEditable);
+    selectedItem->addChild(childItem);
+    std::string childItemText = childItem->text(0).toStdString();
+
+    std::string categoryId{Util::GenerateUuidString()};
+    childItem->setData(0, Qt::ItemDataRole::UserRole, QString::fromStdString(categoryId));
+    m_userData.categoryItemMap[categoryId] = childItem;
+
+
+    // parent_id = selected_item.data(0, Qt.ItemDataRole.UserRole)
+
+    // self.cat_tree.blockSignals(False)
+    // log_widget.init_subcategory(category_id, parent_id, child_item_text, self.user_id)
+    // self.sort_display()
 }
 
 void CategoryWidget::CleanupChildItems(QTreeWidgetItem& item)
@@ -141,14 +162,50 @@ bool CategoryWidget::IsCurCategorySelected()
     return false;
 }
 
-bool CategoryWidget::IsInnerMostLayer()
+bool CategoryWidget::IsInnerMostLayer(QTreeWidgetItem* item)
 {
-    return true;
+    if (!item)
+    {
+        QTreeWidgetItem* curItem = m_uiTreeWidget.currentItem();
+        QTreeWidgetItem* parent = curItem->parent();
+        if (!parent)
+            return false;
+
+        if (parent->parent())
+            return true;
+        return false;
+    }
+
+    QTreeWidgetItem* parent = item->parent();
+    if (parent)
+    {
+        if (parent->parent())
+            return true;
+        else
+            return false;
+    }
+
+    return false;
 }
 
-bool CategoryWidget::IsOuterMostLayer()
+bool CategoryWidget::IsOuterMostLayer(QTreeWidgetItem* item)
 {
-    return true;
+    if (!item)
+    {
+        QTreeWidgetItem* curItem = m_uiTreeWidget.currentItem();
+        QTreeWidgetItem* parent = curItem->parent();
+        if (!parent)
+            return true;
+
+        return false;
+    }
+
+    QTreeWidgetItem* parent = item->parent();
+    if (!parent)
+        return true;
+
+    return false;
+
 }
 
 void CategoryWidget::LoadCategories()

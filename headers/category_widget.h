@@ -14,7 +14,7 @@ class CategoryWidget : public QObject
 public:
     explicit CategoryWidget(QTreeWidget& uiTreeWidget, UserData& userDataStruct, UserSettings& userSettingsStruct);
     void AddCategory();
-    void AddSubCategory();
+    void AddSubCategory(QTreeWidgetItem* selectedItem);
     void CleanupChildItems(QTreeWidgetItem& item);
     void DeleteSelectedCategory();
     void DisplayTotalTime(QTreeWidgetItem& item, int& time);
@@ -25,8 +25,8 @@ public:
     void HideSubcatTotal(); // may put this in CategoryMenu TU later
     void InitCategoryTree();
     bool IsCurCategorySelected();
-    bool IsInnerMostLayer();
-    bool IsOuterMostLayer();
+    bool IsInnerMostLayer(QTreeWidgetItem* item = nullptr);
+    bool IsOuterMostLayer(QTreeWidgetItem* item = nullptr);
     void LoadCategories();
     void LoadSubCategories();
     void ShowSubcatTotalTime(); // may put this in CategoryMenu TU later
