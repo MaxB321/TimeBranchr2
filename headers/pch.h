@@ -21,6 +21,7 @@
 #include <QCoreApplication>
 #include <QObject>
 #include <QString>
+#include <QDebug>
 // ---- Qt Gui ----
 #include <QColor>
 #include <QFont>

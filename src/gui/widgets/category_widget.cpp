@@ -112,6 +112,8 @@ void CategoryWidget::DeleteSelectedCategory()
         }
             
     } 
+
+    Util::Debug::printItemMap(m_userData.categoryItemMap);
     
     // if (m_uiTreeWidget.topLevelItemCount() == 0)
         // log_widget.clear_log_view()

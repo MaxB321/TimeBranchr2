@@ -37,8 +37,8 @@ target_precompile_headers(${PROJ_NAME} PRIVATE
     headers/pch.h
 )
 
-# No console window for the GUI app
-set_target_properties(${PROJ_NAME} PROPERTIES WIN32_EXECUTABLE ON)
+# No console window for the GUI app (only for non-debug builds)
+set_target_properties(${PROJ_NAME} PROPERTIES WIN32_EXECUTABLE $<NOT:$<CONFIG:Debug>>)
 
 # Copy Qt DLLs/plugins next to the exe after each build
 add_custom_command(TARGET ${PROJ_NAME} POST_BUILD

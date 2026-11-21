@@ -22,3 +22,14 @@ std::string Util::GenerateUuidString()
 {
     return uuids::to_string(GenerateUuid());
 }
+
+void Util::Debug::printItemMap(const std::unordered_map<std::string, QTreeWidgetItem*>& itemMap)
+{
+    qDebug() << "categoryItemMap size:" << itemMap.size();
+
+    for (const auto& [key, item] : itemMap) {
+        qDebug() << "Key:" << QString::fromStdString(key)
+                 << "| Val:" << item
+                 << "| Text:" << (item ? item->text(0) : "<null>");
+    }
+}
