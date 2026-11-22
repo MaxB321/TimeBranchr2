@@ -8,8 +8,8 @@ struct UserData
 {
     // std::string key is hash id
     std::unordered_map<std::string, QTreeWidgetItem*> categoryItemMap{};
-    std::unordered_map<std::string, std::string> categories{};
-    std::unordered_map<std::string, std::string> subCategories{};
+    std::unordered_map<std::string, std::string> categories{}; // prob unneeded since have ptr to item
+    std::unordered_map<std::string, std::string> subCategories{}; // prob unneeded since have ptr to item
     std::unordered_map<std::string, CategoryType> categoryTypeMap{};
 
     std::unordered_map<std::string, QTreeWidgetItem*> logItemMap{};

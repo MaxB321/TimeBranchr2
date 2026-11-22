@@ -168,9 +168,9 @@ std::string CategoryWidget::GetCategoryId(QTreeWidgetItem* item)
     return item->data(0, Qt::ItemDataRole::UserRole).toString().toStdString();
 }
 
-CategoryType CategoryWidget::GetCategoryType(QTreeWidgetItem& item)
+CategoryType CategoryWidget::GetCategoryType(std::string& categoryId)
 {
-    return CategoryType::MainCategory;
+    return m_userData.categoryTypeMap[categoryId];
 }
 
 void CategoryWidget::HideSubcatTotal() 

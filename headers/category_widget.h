@@ -21,7 +21,7 @@ public:
     void EditWidgetText();
     std::string FormatCategoryTime(int& time); // will do after LogWidget
     std::string GetCategoryId(QTreeWidgetItem* item);
-    CategoryType GetCategoryType(QTreeWidgetItem& item);
+    CategoryType GetCategoryType(std::string& categoryId);
     void HideSubcatTotal(); // MenuWidget will call this
     void InitCategoryTree();
     bool IsCurCategorySelected();
