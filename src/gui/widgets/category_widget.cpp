@@ -67,7 +67,35 @@ void CategoryWidget::AddSubCategory(QTreeWidgetItem* selectedItem)
 
 void CategoryWidget::CleanupChildItems(QTreeWidgetItem& item)
 {
+    int childCount = item.childCount();
+    if (childCount == 0)
+        return;
+    
+    uint32_t i{0};
+    uint32_t j{0};
 
+    while (i < childCount)
+    {
+        QTreeWidgetItem* curChild = item.child(0);
+
+        j = 0;
+        int innerChildCount = curChild->childCount();
+        while (j < innerChildCount)
+        {
+            QTreeWidgetItem* innerChild = curChild->child(0);
+            std::string categoryId = innerChild->data(0, Qt::ItemDataRole::UserRole).toString().toStdString();
+            curChild->removeChild(innerChild);
+            delete innerChild;
+            m_userData.categoryItemMap.erase(categoryId);
+            ++j;
+        }
+        std::string categoryId = curChild->data(0, Qt::ItemDataRole::UserRole).toString().toStdString();
+        item.removeChild(curChild);
+        delete curChild;
+        m_userData.categoryItemMap.erase(categoryId);
+        ++i;
+    }
+    // put config deletion/update func here (prob multithreading)
 }
 
 void CategoryWidget::DeleteSelectedCategory()
@@ -80,11 +108,10 @@ void CategoryWidget::DeleteSelectedCategory()
         // log_widget._user_logs.pop(category_id, None)
         QTreeWidgetItem* parent = curItem->parent();
         
-        if (CategoryWidget::IsOuterMostLayer())
+        if (CategoryWidget::IsOuterMostLayer(curItem))
         {
             CategoryWidget::CleanupChildItems(*curItem);
-            m_uiTreeWidget.takeTopLevelItem(m_uiTreeWidget.indexOfTopLevelItem(curItem));
-            // remove from UserData->categoryItemMap
+            delete m_uiTreeWidget.takeTopLevelItem(m_uiTreeWidget.indexOfTopLevelItem(curItem));
         }
         else
         {
@@ -115,8 +142,6 @@ void CategoryWidget::DeleteSelectedCategory()
         }
         m_userData.categoryItemMap.erase(categoryId);
     }
-
-    Util::Debug::printItemMap(m_userData.categoryItemMap);
     
     // if (m_uiTreeWidget.topLevelItemCount() == 0)
         // log_widget.clear_log_view()
@@ -160,13 +185,8 @@ void CategoryWidget::InitCategoryTree()
     header->setSectionResizeMode(0, header->ResizeMode::Stretch);
     header->setSectionResizeMode(1, header->ResizeMode::Custom);
     m_uiTreeWidget.setColumnWidth(1, 125);
-    // if config.isConfig():
-    //     if config.categories_asc:
-    //         self.cat_tree.sortByColumn(0, Qt.SortOrder.AscendingOrder)
-    //     else:
-    //         self.cat_tree.sortByColumn(0, Qt.SortOrder.DescendingOrder)
-    // else:
-    //     self.cat_tree.sortByColumn(0, Qt.SortOrder.AscendingOrder)
+    
+    // CategoryWidget::SortCategories();
 }
 
 bool CategoryWidget::IsCurCategorySelected()

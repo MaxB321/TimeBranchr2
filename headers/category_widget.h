@@ -17,21 +17,21 @@ public:
     void AddSubCategory(QTreeWidgetItem* selectedItem);
     void CleanupChildItems(QTreeWidgetItem& item);
     void DeleteSelectedCategory();
-    void DisplayTotalTime(QTreeWidgetItem& item, int& time);
+    void DisplayTotalTime(QTreeWidgetItem& item, int& time); // will do after LogWidget
     void EditWidgetText();
-    std::string FormatCategoryTime(int& time);
+    std::string FormatCategoryTime(int& time); // will do after LogWidget
     std::string GetCategoryId(QTreeWidgetItem* item);
     CategoryType GetCategoryType(QTreeWidgetItem& item);
-    void HideSubcatTotal(); // may put this in CategoryMenu TU later
+    void HideSubcatTotal(); // MenuWidget will call this
     void InitCategoryTree();
     bool IsCurCategorySelected();
     bool IsInnerMostLayer(QTreeWidgetItem* item = nullptr);
     bool IsOuterMostLayer(QTreeWidgetItem* item = nullptr);
-    void LoadCategories();
-    void LoadSubCategories();
-    void ShowSubcatTotalTime(); // may put this in CategoryMenu TU later
-    void SortCategories();
-    void UpdateCategoryTime();
+    void LoadCategories(); // will do after config
+    void LoadSubCategories(); // will do after config
+    void ShowSubcatTotalTime(); // MenuWidget will call this
+    void SortCategories(); // will do after MenuWidget
+    void UpdateCategoryTime(); // will do after LogWidget
 
 
 private:
