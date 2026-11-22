@@ -6,13 +6,13 @@ LogWidget::LogWidget(QTreeWidget& uiTreeWidget, UserData& userDataStruct, UserSe
     : m_uiTreeWidget(uiTreeWidget), m_userData(userDataStruct), m_userSettingsStruct(userSettingsStruct)
 {
     uiTreeWidget.viewport()->installEventFilter(this);
-
+    InitLogTree();
 
 }
 
 void LogWidget::AddLog()
 {
-
+    
 }
 
 void LogWidget::ClearLogView()
@@ -45,9 +45,18 @@ void LogWidget::GetDatetime()
 
 }
 
+void LogWidget::InitLogTree()
+{
+    QHeaderView* header = m_uiTreeWidget.header();
+    header->setStretchLastSection(false);
+    header->setSectionResizeMode(0, header->ResizeMode::Stretch);
+    header->setSectionResizeMode(1, header->ResizeMode::Custom);
+    m_uiTreeWidget.setColumnWidth(1, 125);
+}
+
 bool LogWidget::LogsDisplayed()
 {
-
+    return true;
 }
 
 void LogWidget::LoadLogs()

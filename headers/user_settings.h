@@ -4,11 +4,11 @@
 
 struct UserSettings
 {
-    bool DarkMode{};
-    bool CategorySortAscending{};
-    bool LogSortAscending{};
-    bool ShowSubcatTotals{};
-    bool ShowUsername{};
+    bool DarkMode{true};
+    bool CategorySortAscending{true};
+    bool LogSortAscending{true};
+    bool ShowSubcatTotals{true};
+    bool ShowUsername{true};
 };
 
 

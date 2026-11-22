@@ -20,6 +20,7 @@ public:
     void DisplayLogsAscending();
     void DisplayLogsDescending();
     void GetDatetime();
+    void InitLogTree();
     bool LogsDisplayed();
     void LoadLogs();
 

@@ -11,7 +11,7 @@ MainWindow::MainWindow(UserData& userDataStruct, UserSettings& userSettingsStruc
 
     m_pTimerWidget = new TimerWidget(*timerLabel, *pauseLabel);
     m_pCategoryWidget = new CategoryWidget(*categoryTreeWidget, userDataStruct, userSettingsStruct);
-    m_pLogWidget = new LogWidget(*categoryTreeWidget, userDataStruct, userSettingsStruct);
+    m_pLogWidget = new LogWidget(*logTreeWidget, userDataStruct, userSettingsStruct);
     m_pToolbarWidget = new ToolbarWidget(*this, *m_pTimerWidget, *m_pCategoryWidget);
     addToolBar(m_pToolbarWidget);
 }
