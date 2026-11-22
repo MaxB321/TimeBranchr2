@@ -5,6 +5,9 @@
 CategoryWidget::CategoryWidget(QTreeWidget& uiTreeWidget, UserData& userDataStruct, UserSettings& userSettingsStruct)
     : m_uiTreeWidget(uiTreeWidget), m_userData(userDataStruct), m_userSettingsStruct(userSettingsStruct)
 {
+    uiTreeWidget.viewport()->installEventFilter(this);
+    CategoryWidget::InitCategoryTree();
+
     connect(&m_uiTreeWidget, &QTreeWidget::itemDoubleClicked, this, &CategoryWidget::EditWidgetText);
 }
 
@@ -110,8 +113,8 @@ void CategoryWidget::DeleteSelectedCategory()
             }
                 
         }
-            
-    } 
+        m_userData.categoryItemMap.erase(categoryId);
+    }
 
     Util::Debug::printItemMap(m_userData.categoryItemMap);
     
@@ -152,7 +155,18 @@ void CategoryWidget::HideSubcatTotal()
 
 void CategoryWidget::InitCategoryTree()
 {
-
+    QHeaderView* header = m_uiTreeWidget.header();
+    header->setStretchLastSection(false);
+    header->setSectionResizeMode(0, header->ResizeMode::Stretch);
+    header->setSectionResizeMode(1, header->ResizeMode::Custom);
+    m_uiTreeWidget.setColumnWidth(1, 125);
+    // if config.isConfig():
+    //     if config.categories_asc:
+    //         self.cat_tree.sortByColumn(0, Qt.SortOrder.AscendingOrder)
+    //     else:
+    //         self.cat_tree.sortByColumn(0, Qt.SortOrder.DescendingOrder)
+    // else:
+    //     self.cat_tree.sortByColumn(0, Qt.SortOrder.AscendingOrder)
 }
 
 bool CategoryWidget::IsCurCategorySelected()
@@ -233,4 +247,20 @@ void CategoryWidget::SortCategories()
 void CategoryWidget::UpdateCategoryTime()
 {
 
+}
+
+
+// OVERRIDES
+
+// enables deselect widget capability
+bool CategoryWidget::eventFilter(QObject* object, QEvent* event)
+{
+    if (object == m_uiTreeWidget.viewport() && event->type() == QEvent::MouseButtonPress) {
+        auto* mouseEvent = static_cast<QMouseEvent*>(event);
+
+        if (!m_uiTreeWidget.itemAt(mouseEvent->position().toPoint()))
+            m_uiTreeWidget.clearSelection();
+    }
+
+    return false;
 }

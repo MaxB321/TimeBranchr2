@@ -39,5 +39,9 @@ private:
     UserData& m_userData;
     UserSettings& m_userSettingsStruct;
 
+
+protected:
+    bool eventFilter(QObject* watched, QEvent* event) override;
+
 };
 
