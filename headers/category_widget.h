@@ -35,6 +35,8 @@ public:
 
 
 private:
+    void FreeItem(const std::string& categoryId, QTreeWidgetItem* item = nullptr);
+
     QTreeWidget& m_uiTreeWidget;
     UserData& m_userData;
     UserSettings& m_userSettingsStruct;

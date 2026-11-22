@@ -23,13 +23,25 @@ std::string Util::GenerateUuidString()
     return uuids::to_string(GenerateUuid());
 }
 
-void Util::Debug::printItemMap(const std::unordered_map<std::string, QTreeWidgetItem*>& itemMap)
+void Util::Debug::printItemMap(const std::unordered_map<std::string, QTreeWidgetItem*>& categoryItemMap)
 {
-    qDebug() << "categoryItemMap size:" << itemMap.size();
+    qDebug() << "categoryItemMap size:" << categoryItemMap.size();
 
-    for (const auto& [key, item] : itemMap) {
+    for (const auto& [key, item] : categoryItemMap) 
+    {
         qDebug() << "Key:" << QString::fromStdString(key)
                  << "| Val:" << item
                  << "| Text:" << (item ? item->text(0) : "<null>");
+    }
+}
+
+void Util::Debug::printItemMap(const std::unordered_map<std::string, CategoryType>& categoryItemMap)
+{
+    qDebug() << "categoryItemMap size:" << categoryItemMap.size();
+
+    for (const auto& [key, val] : categoryItemMap) 
+    {
+        qDebug() << "Key:" << QString::fromStdString(key)
+                 << "| Type:" << static_cast<uint8_t>(val);
     }
 }
