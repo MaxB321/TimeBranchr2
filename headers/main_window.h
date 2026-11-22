@@ -5,6 +5,7 @@
 #include "toolbar_widget.h"
 #include "timer_widget.h"
 #include "category_widget.h"
+#include "log_widget.h"
 
 
 class MainWindow : public QMainWindow, public Ui_MainWindow
@@ -15,6 +16,7 @@ public:
 
 private:
     CategoryWidget* m_pCategoryWidget{};
+    LogWidget* m_pLogWidget{};
     TimerWidget* m_pTimerWidget{};
     ToolbarWidget* m_pToolbarWidget{};
     
