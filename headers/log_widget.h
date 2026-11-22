@@ -19,13 +19,16 @@ public:
     void DisplayLogs();
     void DisplayLogsAscending();
     void DisplayLogsDescending();
+    std::string GetCurCategoryId();
     void GetDatetime();
     void InitLogTree();
     bool LogsDisplayed();
     void LoadLogs();
+    void SetCurCategoryId(std::string& categoryId);
 
 
 private:
+    std::string m_curCategoryId{};
     QTreeWidget& m_uiTreeWidget;
     UserData& m_userData;
     UserSettings& m_userSettingsStruct;

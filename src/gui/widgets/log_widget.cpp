@@ -12,7 +12,7 @@ LogWidget::LogWidget(QTreeWidget& uiTreeWidget, UserData& userDataStruct, UserSe
 
 void LogWidget::AddLog()
 {
-    
+
 }
 
 void LogWidget::ClearLogView()
@@ -40,6 +40,11 @@ void LogWidget::DisplayLogsDescending()
 
 }
 
+std::string LogWidget::GetCurCategoryId()
+{
+    return m_curCategoryId;
+}
+
 void LogWidget::GetDatetime()
 {
 
@@ -62,6 +67,11 @@ bool LogWidget::LogsDisplayed()
 void LogWidget::LoadLogs()
 {
 
+}
+
+void LogWidget::SetCurCategoryId(std::string& categoryId)
+{
+    m_curCategoryId = categoryId;
 }
 
 

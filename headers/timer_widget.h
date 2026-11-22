@@ -9,7 +9,7 @@ class TimerWidget : public QObject
     Q_OBJECT
 public:
     explicit TimerWidget(QLabel& timerLabel, QLabel& pauseLabel);
-
+    uint32_t GetSeconds();
     void PauseTimer();
     void SetTimerColor(DisplayMode displayMode);
     void StartTimer();

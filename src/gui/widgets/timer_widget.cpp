@@ -11,6 +11,11 @@ TimerWidget::TimerWidget(QLabel& timerLabel, QLabel& pauseLabel)
     QObject::connect(&m_timer, &QTimer::timeout, this, &TimerWidget::UpdateTimer);
 }
 
+uint32_t TimerWidget::GetSeconds()
+{
+    return m_elapsedSeconds;
+}
+
 void TimerWidget::PauseTimer()
 {
     if (m_timer.isActive())
@@ -32,6 +37,8 @@ void TimerWidget::SetTimerColor(DisplayMode displayMode)
 
 void TimerWidget::StartTimer()
 {
+    m_elapsedSeconds = 0;
+
     if (!m_timer.isActive() && m_timerLabel.text() == "00:00:00")
         m_timer.start();
 }
@@ -39,7 +46,6 @@ void TimerWidget::StartTimer()
 void TimerWidget::StopTimer()
 {
     m_timer.stop();
-    m_elapsedSeconds = 0;
     m_timerLabel.setText("00:00:00");
     m_pauseLabel.setVisible(false);
 }

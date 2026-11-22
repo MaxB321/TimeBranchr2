@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "toolbar_widget.h"
 
-ToolbarWidget::ToolbarWidget(QWidget& parent, TimerWidget& timerWidget, CategoryWidget& categoryWidget)
-    : QToolBar(&parent), m_timerWidget(timerWidget), m_categoryWidget(categoryWidget)
+ToolbarWidget::ToolbarWidget(QWidget& parent, TimerWidget& timerWidget, CategoryWidget& categoryWidget, LogWidget& logWidget)
+    : QToolBar(&parent), m_timerWidget(timerWidget), m_categoryWidget(categoryWidget), m_logWidget(logWidget)
 {
     setMovable(false);
     setToolButtonStyle(Qt::ToolButtonStyle::ToolButtonTextUnderIcon);
@@ -52,7 +52,13 @@ void ToolbarWidget::PauseTimer()
 
 void ToolbarWidget::StartTimer()
 {
-    m_timerWidget.StartTimer();
+    if (m_categoryWidget.IsCurCategorySelected())
+    {
+        QTreeWidgetItem* item = m_categoryWidget.GetCurCategory();
+        m_timerWidget.StartTimer();
+        std::string categoryId = m_categoryWidget.GetCategoryId(item);
+        m_logWidget.SetCurCategoryId(categoryId);
+    }
 }
 
 void ToolbarWidget::StopTimer()

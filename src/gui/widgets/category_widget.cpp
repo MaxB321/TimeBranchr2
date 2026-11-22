@@ -168,6 +168,11 @@ CategoryType CategoryWidget::GetCategoryType(std::string& categoryId)
     return m_userData.categoryTypeMap[categoryId];
 }
 
+QTreeWidgetItem* CategoryWidget::GetCurCategory()
+{
+    return m_uiTreeWidget.currentItem();
+}
+
 void CategoryWidget::HideSubcatTotal() 
 {
 
