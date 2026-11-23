@@ -54,7 +54,7 @@ void ToolbarWidget::StartTimer()
 {
     if (m_categoryWidget.IsCurCategorySelected())
     {
-        QTreeWidgetItem* item = m_categoryWidget.GetCurCategory();
+        QTreeWidgetItem* item = m_categoryWidget.GetSelectedCategory();
         m_timerWidget.StartTimer();
         std::string categoryId = m_categoryWidget.GetCategoryId(item);
         m_logWidget.SetCurCategoryId(categoryId);
@@ -64,4 +64,5 @@ void ToolbarWidget::StartTimer()
 void ToolbarWidget::StopTimer()
 {
     m_timerWidget.StopTimer();
+    m_logWidget.AddLog();
 }

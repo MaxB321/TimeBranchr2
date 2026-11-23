@@ -3,7 +3,7 @@
 
 
 CategoryWidget::CategoryWidget(QTreeWidget& uiTreeWidget, UserData& userDataStruct, UserSettings& userSettingsStruct)
-    : m_uiTreeWidget(uiTreeWidget), m_userData(userDataStruct), m_userSettingsStruct(userSettingsStruct)
+    : m_uiTreeWidget(uiTreeWidget), m_userData(userDataStruct), m_userSettings(userSettingsStruct)
 {
     uiTreeWidget.viewport()->installEventFilter(this);
     InitCategoryTree();
@@ -168,7 +168,7 @@ CategoryType CategoryWidget::GetCategoryType(std::string& categoryId)
     return m_userData.categoryTypeMap[categoryId];
 }
 
-QTreeWidgetItem* CategoryWidget::GetCurCategory()
+QTreeWidgetItem* CategoryWidget::GetSelectedCategory()
 {
     return m_uiTreeWidget.currentItem();
 }

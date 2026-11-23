@@ -2,8 +2,8 @@
 #include "log_widget.h"
 
 
-LogWidget::LogWidget(QTreeWidget& uiTreeWidget, UserData& userDataStruct, UserSettings& userSettingsStruct)
-    : m_uiTreeWidget(uiTreeWidget), m_userData(userDataStruct), m_userSettingsStruct(userSettingsStruct)
+LogWidget::LogWidget(QTreeWidget& uiTreeWidget, UserData& userDataStruct, UserSettings& userSettingsStruct, TimerWidget& timerWidget)
+    : m_uiTreeWidget(uiTreeWidget), m_userData(userDataStruct), m_userSettings(userSettingsStruct), m_timerWidget(timerWidget)
 {
     uiTreeWidget.viewport()->installEventFilter(this);
     InitLogTree();
@@ -12,7 +12,20 @@ LogWidget::LogWidget(QTreeWidget& uiTreeWidget, UserData& userDataStruct, UserSe
 
 void LogWidget::AddLog()
 {
+    uint32_t seconds{m_timerWidget.GetSeconds()};
+    if (seconds == 0)
+        return;
 
+    std::chrono::system_clock::time_point curDateTime = std::chrono::floor<std::chrono::seconds>(std::chrono::system_clock::now());
+    m_userData.logs[m_curCategoryId].push_back(seconds);
+    m_userData.logsDatetime[m_curCategoryId].push_back(curDateTime);
+
+    if (m_userSettings.LogSortAscending)
+        DisplayLogsAscending();
+    else
+        DisplayLogsDescending();
+    
+    // self.log_added.emit(self._category_id)
 }
 
 void LogWidget::ClearLogView()

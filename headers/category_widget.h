@@ -22,7 +22,7 @@ public:
     std::string FormatCategoryTime(int& time); // will do after LogWidget
     std::string GetCategoryId(QTreeWidgetItem* item);
     CategoryType GetCategoryType(std::string& categoryId);
-    QTreeWidgetItem* GetCurCategory();
+    QTreeWidgetItem* GetSelectedCategory();
     void HideSubcatTotal(); // MenuWidget will call this
     void InitCategoryTree();
     bool IsCurCategorySelected();
@@ -40,7 +40,7 @@ private:
 
     QTreeWidget& m_uiTreeWidget;
     UserData& m_userData;
-    UserSettings& m_userSettingsStruct;
+    UserSettings& m_userSettings;
 
 
 protected:
